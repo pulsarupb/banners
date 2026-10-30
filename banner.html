@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DRIFT — Autonomous Intelligence</title>
+  <style>
+    @font-face { font-family: Science; src: url('assets/science-gothic-latin.woff2'); font-weight: 300 900; font-stretch: 50% 200%; }
+    @font-face { font-family: Plex; src: url('assets/ibm-plex-sans-latin-normal.woff2'); font-weight: 300 700; }
+    @page { size: A3 landscape; margin: 0; }
+    :root { --ink: #0a0a0c; --lime: #ccff00; --muted: #a7a7ad; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { background: #29292c; color: #fff; font-family: Plex, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .banner { width: 420mm; height: 297mm; position: relative; overflow: hidden; background: var(--ink); }
+    .grid { position: absolute; inset: 0; background-image: linear-gradient(#ffffff07 .2mm, transparent .2mm), linear-gradient(90deg, #ffffff07 .2mm, transparent .2mm); background-size: 14mm 14mm; }
+    .top-line { position: absolute; left: 16mm; top: 0; width: 29mm; height: 2mm; background: var(--lime); }
+    header { position: absolute; inset: 15mm 16mm auto; height: 37mm; display: flex; align-items: flex-start; justify-content: space-between; border-bottom: .25mm solid #ffffff35; }
+    .brand img { display: block; width: 99mm; height: 19mm; object-fit: contain; object-position: left; }
+    .brand p { margin: 3mm 0 0; font-size: 2.7mm; letter-spacing: 1mm; color: var(--muted); text-transform: uppercase; }
+    .partners { display: flex; gap: 8mm; align-items: center; }
+    .partner-intro { font-size: 2.8mm; color: var(--muted); text-transform: uppercase; letter-spacing: .65mm; line-height: 1.7; text-align: right; margin-right: 2mm; }
+    .partner { display: flex; align-items: center; gap: 3mm; }
+    .partner img { width: 24mm; height: 24mm; border-radius: 50%; }
+    .partner span { font-size: 3.3mm; font-weight: 600; letter-spacing: .5mm; }
+    .partner small { display: block; margin-top: 1mm; max-width: 33mm; font-size: 2.65mm; color: var(--muted); line-height: 1.35; letter-spacing: 0; font-weight: 400; }
+    .hero { position: absolute; left: 16mm; top: 66mm; z-index: 2; }
+    .eyebrow { margin: 0 0 7mm; color: var(--lime); text-transform: uppercase; font-size: 3mm; font-weight: 500; letter-spacing: 1.1mm; display: flex; gap: 3mm; align-items: center; }
+    .eyebrow::before { content: ''; display: block; width: 2mm; height: 2mm; background: var(--lime); }
+    h1 { margin: 0; font-family: Science, sans-serif; font-size: 21mm; font-weight: 800; font-stretch: 112%; letter-spacing: -.95mm; line-height: 1.13; text-transform: uppercase; }
+    h1 span { color: var(--lime); display: block; }
+    .hero-copy { margin: 8mm 0 0; font-size: 4.3mm; line-height: 1.55; color: #bcbcc2; }
+    .hero-copy strong { font-weight: 500; color: #fff; }
+    .orbit { position: absolute; width: 116mm; height: 116mm; right: 10mm; top: 63mm; }
+    .orbit svg { width: 100%; height: 100%; }
+    .vehicle { position: absolute; object-fit: contain; filter: brightness(0) invert(1); }
+    .vehicle.rover { width: 39mm; height: 32mm; top: 43mm; left: 39mm; }
+    .vehicle.drone { width: 25mm; height: 15mm; top: 7mm; left: 65mm; transform: rotate(-15deg); }
+    .vehicle.car { width: 29mm; height: 14mm; top: 88mm; left: 13mm; transform: rotate(-15deg); }
+    .orbit-label { position: absolute; top: 80mm; left: 56mm; color: var(--lime); font-size: 2.3mm; letter-spacing: .6mm; }
+    .disciplines { position: absolute; top: 181mm; left: 16mm; right: 16mm; display: grid; grid-template-columns: repeat(3, 1fr); border-top: .25mm solid #ffffff45; border-bottom: .25mm solid #ffffff45; }
+    .discipline { position: relative; padding: 7mm 7mm 7mm 0; min-height: 49mm; }
+    .discipline + .discipline { border-left: .25mm solid #ffffff35; padding-left: 8mm; }
+    .number { font-size: 2.8mm; letter-spacing: .55mm; color: var(--muted); }
+    .focus { display: flex; align-items: center; gap: 3mm; margin-top: 3mm; }
+    .focus::before { content: ''; width: 2mm; height: 6mm; background: var(--lime); }
+    h2 { font-family: Science, sans-serif; font-size: 6.2mm; font-stretch: 115%; text-transform: uppercase; line-height: 1.2; letter-spacing: .1mm; margin: 0; }
+    .discipline p { margin: 2.5mm 0 0; font-size: 3.45mm; color: #bcbcc2; }
+    footer { position: absolute; left: 16mm; right: 16mm; top: 244mm; display: flex; justify-content: space-between; align-items: center; }
+    .invitation { margin: 0 0 3mm; font-family: Science, sans-serif; font-weight: 650; font-size: 6.7mm; letter-spacing: -.15mm; text-transform: uppercase; }
+    .footer-note { margin: 0; font-size: 3.3mm; color: var(--muted); }
+    .discover { display: flex; align-items: center; gap: 6mm; color: inherit; text-decoration: none; }
+    .discover-copy { text-align: right; }
+    .discover-copy small { display: block; font-size: 2.8mm; letter-spacing: .65mm; text-transform: uppercase; color: var(--muted); margin-bottom: 2mm; }
+    .url { font-family: Science, sans-serif; font-size: 8mm; font-weight: 700; color: var(--lime); letter-spacing: -.3mm; }
+    .qr { width: 31mm; height: 31mm; background: white; }
+    .bottom-line { position: absolute; bottom: 0; height: 2.5mm; left: 0; right: 0; background: var(--lime); }
+    .bottom-line::after { content: ''; display: block; position: absolute; right: 16mm; top: 0; height: 100%; width: 29mm; background: repeating-linear-gradient(120deg, var(--ink) 0 1mm, transparent 1mm 3mm); }
+    @media screen { .banner { margin: 20px auto; box-shadow: 0 12px 60px #0006; } }
+    @media print { body { background: var(--ink); } .banner { margin: 0; } }
+  </style>
+</head>
+<body>
+  <main class="banner" aria-label="DRIFT robotics laboratory banner">
+    <div class="grid" aria-hidden="true"></div>
+    <div class="top-line" aria-hidden="true"></div>
+    <header>
+      <div class="brand">
+        <img src="assets/drift-wide.svg" alt="DRIFT">
+        <p>Robotics / Autonomy / Research</p>
+      </div>
+      <div class="partners" aria-label="Supporting institutions">
+        <div class="partner-intro">Student-led.<br>Research-driven.</div>
+        <div class="partner"><img src="assets/campus-circular.png" alt="CAMPUS logo"><span>CAMPUS<small>Research Institute</small></span></div>
+        <div class="partner"><img src="assets/fimm-circular.png" alt="FIMM logo"><span>FIMM<small>Mechanical Engineering<br>&amp; Mechatronics</small></span></div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">Built by students. Driven by curiosity.</p>
+      <h1>Autonomous<span>Intelligence</span></h1>
+      <p class="hero-copy">From planetary rovers to self-driving vehicles.<br><strong>Engineering the next generation of autonomous systems.</strong></p>
+    </section>
+
+    <div class="orbit" aria-hidden="true">
+      <svg viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="220" cy="220" r="183" stroke="#343439" stroke-width="1"/>
+        <circle cx="220" cy="220" r="148" stroke="#46464b" stroke-width="1" stroke-dasharray="2 10"/>
+        <circle cx="220" cy="220" r="108" stroke="#343439" stroke-width="1"/>
+        <path d="M220 9V36M220 404V431M9 220H36M404 220H431" stroke="#929299"/>
+        <path d="M37 220A183 183 0 0 1 204 38M403 220A183 183 0 0 1 237 402" stroke="#ccff00" stroke-width="3"/>
+        <path d="M198 32L207 38L198 44M242 396L233 402L242 408" stroke="#ccff00" stroke-width="2"/>
+        <path d="M70 70L370 370M70 370L370 70" stroke="#303035" stroke-dasharray="4 8"/>
+        <circle cx="220" cy="220" r="78" fill="#0a0a0c"/>
+        <circle cx="40" cy="253" r="5" fill="#ccff00"/>
+        <circle cx="400" cy="187" r="5" fill="#ccff00"/>
+      </svg>
+      <img class="vehicle rover" src="assets/rover.svg" alt="">
+      <img class="vehicle drone" src="assets/drone.svg" alt="">
+      <img class="vehicle car" src="assets/car.svg" alt="">
+      <span class="orbit-label">SENSE / PLAN / ACT</span>
+    </div>
+
+    <section class="disciplines" aria-label="Research areas">
+      <article class="discipline">
+        <span class="number">01 / EXPLORE</span>
+        <div class="focus"><h2>Robotics</h2></div>
+        <p>Intelligent machines. Real-world challenges.</p>
+      </article>
+      <article class="discipline">
+        <span class="number">02 / NAVIGATE</span>
+        <div class="focus"><h2>Autonomy</h2></div>
+        <p>Perception, planning &amp; intelligent control.</p>
+      </article>
+      <article class="discipline">
+        <span class="number">03 / CREATE</span>
+        <div class="focus"><h2>Research</h2></div>
+        <p>From bold ideas to working prototypes.</p>
+      </article>
+    </section>
+
+    <footer>
+      <div>
+        <p class="invitation">Build what moves tomorrow.</p>
+        <p class="footer-note">Discover our projects. Explore the lab. Find your place.</p>
+      </div>
+      <a class="discover" href="https://driftlab.ro" aria-label="Discover DRIFT at driftlab.ro">
+        <div class="discover-copy"><small>Explore the lab ↗</small><span class="url">driftlab.ro</span></div>
+        <img class="qr" src="assets/driftlab-qr.svg" alt="Scan to open https://driftlab.ro">
+      </a>
+    </footer>
+    <div class="bottom-line" aria-hidden="true"></div>
+  </main>
+</body>
+</html>

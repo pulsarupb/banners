@@ -1,0 +1,7 @@
+{
+  "name": "drift-a3-banner",
+  "private": true,
+  "type": "module",
+  "scripts": { "export": "node export.mjs" },
+  "devDependencies": { "playwright-core": "^1.56.1", "qrcode": "^1.5.4" }
+}
